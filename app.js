@@ -1,8 +1,48 @@
-const { Client, Song } = require('./db/models');
+const { Client, Song, Score } = require('./db/models');
 
 const pretty = (obj) => console.log(JSON.parse(JSON.stringify(obj)));
 
-((async function run() {
+(async function () {
+  try {
+    // const scores = await Score.findAll();
+    const song = await Client.findByPk(4, {
+      include: {
+        model: Song,
+        as: 'performed',
+      },
+    });
+    pretty(song);
+    // const song = await Song.destroy({ where: { id: 1 } });
+    // await Client.destroy({ where: { name: 'Gregory' } });
+    // const client = await Client.findOne({
+    //   where: {
+    //     name: 'Gregory',
+    //   },
+    //   include: [{
+    //     model: Score,
+    //     include: Song,
+    //   },
+    //   Song,
+    //   ],
+    // });
+    // const prettyClient = JSON.parse(JSON.stringify(client));
+    // prettyClient.Scores = prettyClient.Scores.map((score) => ({
+    //   value: score.value,
+    //   songName: score.Song.title,
+    // }));
+    // delete prettyClient.favoriteId;
+    // prettyClient.favoriteSong = prettyClient.Song;
+    // delete prettyClient.Song;
+    // console.log(client);
+    // console.log(client);
+    // const clients = await Client.findAll();
+    // pretty(clients);
+  } catch (e) {
+    console.log(e);
+  }
+}());
+
+async function run() {
   try {
     // const song = await Song.create({
     //   title: 'The Wall',
@@ -101,4 +141,4 @@ const pretty = (obj) => console.log(JSON.parse(JSON.stringify(obj)));
   } catch (error) {
     console.log(error);
   }
-})());
+}

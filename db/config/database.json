@@ -4,7 +4,9 @@
     "password": "123",
     "database": "karaoke",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",    
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "SequelizeSeedData"
   },
   "test": {
     "username": "root",

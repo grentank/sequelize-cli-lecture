@@ -1,18 +1,25 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Clients', {
+    await queryInterface.createTable('Scores', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
+      clientId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: {
+            tableName: 'Clients',
+          },
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
-      favoriteId: {
+      songId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -21,6 +28,10 @@ module.exports = {
           },
           key: 'id',
         },
+        onDelete: 'CASCADE',
+      },
+      value: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -33,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Clients');
+    await queryInterface.dropTable('Scores');
   },
 };
